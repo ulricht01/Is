@@ -1,0 +1,34 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "ai",
+  "keywords": [
+    "api",
+    "is",
+    "system",
+    "info"
+  ],
+  "homepage": "https://github.com/ulricht01/IS#readme",
+  "bugs": {
+    "url": "https://github.com/ulricht01/IS/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ulricht01/IS.git"
+  },
+  "license": "ISC",
+  "author": "Tomáš Ulrich",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.8.0",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "dotenv": "^17.4.2",
+    "prisma": "^7.8.0"
+  }
+}
