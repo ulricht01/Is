@@ -1,11 +1,41 @@
+"use client"
+
 import Post from "@/components/MainPage/Post";
 import Filter from "@/components/MainPage/Filter";
 import Title from "@/components/MainPage/Title";
 import Container from "@/components/PagesStructure/Container";
 import categoryOptions from "../js/categoryOptions";
+import AddButton from "@/components/AddPost/AddButton";
+import { useState } from "react";
  
 
 export default function Home() {
+  const activeUser = {
+    name: "Tomáš",
+    admin: true
+  }
+
+  const [posts, setPosts] = useState([
+    {
+      jmeno: "Tomáš Ulrich",
+      category: "Informativní",
+      time: "20:30",
+      message: "Lorem ipsum maximum nesmylnum kopium bombium tamtum randum tatom random atom msae kao teprvksa ksdakd"
+    },
+    {
+      jmeno: "Tomáš Ulrich",
+      category: "Informativní",
+      time: "20:30",
+      message: "Lorem ipsum maximum nesmylnum kopium bombium tamtum randum tatom random atom msae kao teprvksa ksdakd"
+    },
+    {
+      jmeno: "Tomáš Ulrich",
+      category: "Informativní",
+      time: "20:30",
+      message: "Lorem ipsum maximum nesmylnum kopium bombium tamtum randum tatom random atom msae kao teprvksa ksdakd"
+    }
+  ])
+  
   return (
     <Container title="Školní informační systém">
         <Title 
@@ -16,9 +46,14 @@ export default function Home() {
           <Filter filterArray={categoryOptions} text="Kategorie" type="category"></Filter>
           <Filter filterArray={categoryOptions} text="Datum" type="date"></Filter>
         </div>
-        <Post name="Tomáš Ulrich" category="Informativní" time="20:30" message="Lorem ipsum maximum nesmylnum kopium bombium tamtum randum tatom random atom msae kao teprvksa ksdakd"></Post>
-        <Post name="Tomáš Ulrich" category="Informativní" time="20:30" message="Lorem ipsum maximum nesmylnum kopium bombium tamtum randum tatom random atom msae kao teprvksa ksdakd"></Post>
-        <Post name="Tomáš Ulrich" category="Informativní" time="20:30" message="Lorem ipsum maximum nesmylnum kopium bombium tamtum randum tatom random atom msae kao teprvksa ksdakd"></Post>
+        {activeUser.admin && (
+        <AddButton></AddButton>
+        )}
+        {
+          posts.map((post, index) => (
+            <Post key={index} name={post.jmeno} category={post.category} time={post.time} message={post.message}></Post>
+          ))
+        }
         <Post name="Tomáš Ulrich" category="Informativní" time="20:30" message="Lorem ipsum maximum nesmylnum kopium bombium tamtum randum tatom random atom msae kao teprvksa ksdakd"></Post>
     </Container>
   );
