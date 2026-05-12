@@ -35,6 +35,16 @@ export default function Home() {
       message: "Lorem ipsum maximum nesmylnum kopium bombium tamtum randum tatom random atom msae kao teprvksa ksdakd"
     }
   ])
+
+  const addPost = (newPostData) => {
+    const newPost = {
+      jmeno: activeUser.name,
+      category: newPostData.category,
+      time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit"}),
+      message: newPostData.post
+    }
+    setPosts([newPost, ...posts])
+  }
   
   return (
     <Container title="Školní informační systém">
@@ -47,7 +57,7 @@ export default function Home() {
           <Filter filterArray={categoryOptions} text="Datum" type="date"></Filter>
         </div>
         {activeUser.admin && (
-        <AddButton></AddButton>
+        <AddButton onAddPost={addPost}></AddButton>
         )}
         {
           posts.map((post, index) => (
