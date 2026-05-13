@@ -1,4 +1,5 @@
 const categoryOptions = [
+    "Kategorie",
     "Důležité",
     "Informativní",
     "Nepřítomnost"

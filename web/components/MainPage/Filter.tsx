@@ -8,10 +8,12 @@ export default function Filter({
     filterArray,
     text,
     type,
+    onFilterChange
 }: {
     filterArray?: Array<string>; // Optional for date filter
     text: string;
     type: "category" | "date"; // Type of filter
+    onFilterChange : (value: string | Date | null) => void;
 }) {
     const [selected, setSelected] = useState(text);
     const [filterOptions, setFilterOptions] = useState(filterArray || []); // Default to empty array for date filter
@@ -38,6 +40,7 @@ export default function Filter({
                                     onClick={() => {
                                         setSelected(option)
                                         setShowOptions(false)
+                                        onFilterChange(option)
                                         }
                                     }
                                     className={`flex items-center justify-between px-4 py-2 text-sm transition-colors w-full
@@ -54,10 +57,16 @@ export default function Filter({
                         
                             <DatePicker
                                 selected={selectedDate}
-                                onChange={(date) => setSelectedDate(date)} // Update selected date
+                                onChange={(date) => {
+                                    setSelectedDate(date)
+                                    onFilterChange(date)
+                                    setShowOptions(false)
+                                }
+                                } // Update selected date
                                 dateFormat="yyyy-MM-dd"
                                 isClearable
                                 placeholderText="Zvolte datum"
+                                inline
                             />
                         
                     )}

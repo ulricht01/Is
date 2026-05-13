@@ -1,4 +1,4 @@
-import { use, useState } from "react"
+import { useState } from "react"
 import categoryOptions from "@/js/categoryOptions"
 
 export default function Form({onAddPost, closeForm}){
@@ -22,9 +22,9 @@ export default function Form({onAddPost, closeForm}){
 
     const handleSubmit = ()=>{
         onAddPost({
-            name: name,
+            title: name,
             post: post,
-            category: category
+            category: category,
         })
 
         setName("")
