@@ -16,10 +16,12 @@ model User {
   email String  @unique
   name  String
   surname String
+  username String @unique
 }
 
 model Admin {
   id Int @id
   email String @unique
   password String
+  username String @unique
 }

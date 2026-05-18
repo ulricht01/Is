@@ -13,7 +13,7 @@ const adapter = new PrismaPg({
 });
 
 export const prisma = new PrismaClient({ adapter })
-const port = 3000;
+const port = 3001;
 const app = express();
 
 
@@ -133,6 +133,9 @@ app.post("/admin/login", async (req, res)=> {
  *               password:
  *                 type: string
  *                 description: The admin's password.
+ *               username:
+ *                 type: string
+ *                 description: The admin's username.
  *     responses:
  *       200:
  *         description: Admin created successfully.
@@ -142,7 +145,7 @@ app.post("/admin/login", async (req, res)=> {
  *         description: Internal server error.
  */
 app.post("/admin/register", async (req, res) => {
-    const {id, email, password} = req.body 
+    const {id, email, password, username} = req.body 
     try {
 
         const hashedPassword = await hashPassword(password)
@@ -151,7 +154,8 @@ app.post("/admin/register", async (req, res) => {
             data: {
                 id: Number(id),
                 email: email,
-                password: hashedPassword
+                password: hashedPassword,
+                username: username
             }
         })
         return res.status(200).json({
@@ -241,6 +245,9 @@ app.get("/getUsers", authenticateAdmin, async (req, res)=> {
  *               surname:
  *                 type: string
  *                 description: The user's last name.
+ *               username:
+ *                 type: string
+ *                 description: The user's username.
  *     responses:
  *       201:
  *         description: User added successfully.
@@ -251,14 +258,15 @@ app.get("/getUsers", authenticateAdmin, async (req, res)=> {
  */
 app.post("/addUser", authenticateAdmin, async (req, res) => {
     try {
-    const {id, email, name, surname} = req.body 
+    const {id, email, name, surname, username} = req.body 
      
     const newUser = await prisma.user.create({
         data: {
             id: Number(id),
             email: email,
             name: name,
-            surname: surname
+            surname: surname,
+            username : username
         }
     })
     return res.status(201).json({
@@ -306,6 +314,9 @@ app.post("/addUser", authenticateAdmin, async (req, res) => {
  *               surname:
  *                 type: string
  *                 description: The user's new last name.
+ *               username:
+ *                 type: string
+ *                 description: The user's new username
  *     responses:
  *       200:
  *         description: User replaced successfully.
@@ -372,6 +383,9 @@ app.put("/replaceUser/:id", authenticateAdmin, async (req, res) => {
  *               surname:
  *                 type: string
  *                 description: The user's new last name.
+ *               username:
+ *                 type: string
+ *                 description: The user's new username
  *     responses:
  *       200:
  *         description: User updated successfully.
